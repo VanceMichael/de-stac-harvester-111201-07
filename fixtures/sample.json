@@ -1,0 +1,35 @@
+{
+  "bbox": [
+    120,
+    0,
+    130,
+    10
+  ],
+  "interval": [
+    "2026-01-01T00:00:00Z",
+    "2026-01-02T00:00:00Z"
+  ],
+  "items": [
+    {
+      "id": "s1",
+      "collection": "ocean",
+      "bbox": [
+        121,
+        1,
+        125,
+        5
+      ],
+      "properties": {
+        "datetime": "2026-01-01T12:00:00Z"
+      },
+      "assets": {
+        "data": {
+          "href": "https://assets.example/s1?v=1",
+          "roles": [
+            "data"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "query": {
+    "bbox": [
+      170,
+      -10,
+      -170,
+      10
+    ],
+    "interval": [
+      "2026-01-01T00:00:00Z",
+      "2026-01-02T00:00:00Z"
+    ],
+    "roles": [
+      "data"
+    ]
+  },
+  "sources": [
+    {
+      "name": "primary",
+      "links": [
+        {
+          "rel": "next",
+          "method": "POST",
+          "href": "/search",
+          "body": {
+            "token": "p2"
+          },
+          "merge": true
+        }
+      ]
+    },
+    {
+      "name": "mirror",
+      "duplicate_observation": "orbit-7-frame-1",
+      "item_id": "other-88"
+    }
+  ],
+  "late_assets": [
+    {
+      "observation": "orbit-7-frame-1",
+      "revision": 2,
+      "role": "data"
+    }
+  ]
+}
