@@ -25,6 +25,28 @@ python3 -m collector serve --db var/records.sqlite3 --port 8080
 
 查询服务监听回环地址，`GET /records` 返回数据库中的记录；按 Ctrl-C 停止。
 
+## 联合检索（跨日界线、多目录）
+
+`collector/federation.py` 在单目录导入之外提供多目录联合检索：可能跨越 180° 经线的
+查询范围先拆成普通经度窗口，再按 UTC 半开时间范围、集合与必需资产角色逐来源检索。
+`collector/scenario.py` 按 `fixtures/catalogs.json` 的描述启动本地合成目录：
+primary 的 next 链接要求把 token 合并进原始 POST 请求体，mirror 使用 GET 游标链接，
+两者条目 ID 不同但观测相同。
+
+```bash
+python3 -m collector federation-demo                                   # 两阶段演示，临时目录
+python3 -m collector federate --phase 1 --db var/federation.sqlite3    # 首次检索
+python3 -m collector federate --phase 2 --db var/federation.sqlite3    # 续传并追补晚发布资产
+python3 -m collector federate --report-only --db var/federation.sqlite3
+```
+
+观测身份只由集合、平台、观测时刻与足迹构成，处理版本（processing:version）作为修订
+保留；条目 ID 与签名资产地址只是来源内部标识和临时定位，不进入去重键。每个来源、
+每个窗口的翻页游标、覆盖状态与隔离记录独立落库：坏条目被隔离后该来源保持不完整，
+其他来源已取得的成果不受牵连；中断的检索下次从已存游标续传，已完成的来源重新翻页
+以追补晚发布的资产。报告分三部分对外说明：已发现的观测（含修订与来源凭据）、仍缺
+少必需资产的观测、未完成的检索区间（含原因），而不是只比较总条数。
+
 ## 组件与数据
 
 `collector/domain.py` 负责来源格式和领域校验；`storage.py` 保留原始对象、导入凭据和当前记录。

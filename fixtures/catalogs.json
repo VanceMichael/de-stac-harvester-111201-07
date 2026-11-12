@@ -10,6 +10,9 @@
       "2026-01-01T00:00:00Z",
       "2026-01-02T00:00:00Z"
     ],
+    "collections": [
+      "ocean-color"
+    ],
     "roles": [
       "data"
     ]
@@ -17,6 +20,11 @@
   "sources": [
     {
       "name": "primary",
+      "endpoint": {
+        "method": "POST",
+        "href": "/search"
+      },
+      "page_size": 2,
       "links": [
         {
           "rel": "next",
@@ -27,19 +35,250 @@
           },
           "merge": true
         }
+      ],
+      "failures": [
+        {
+          "token": "p3",
+          "status": 500,
+          "phases": [
+            1
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "orbit-7-frame-1",
+          "collection": "ocean-color",
+          "bbox": [
+            172,
+            -8,
+            178,
+            -2
+          ],
+          "properties": {
+            "datetime": "2026-01-01T06:00:00Z",
+            "platform": "ocean-sat-1",
+            "processing:version": "1"
+          },
+          "assets": {
+            "preview": {
+              "href": "https://primary.example/assets/orbit-7-frame-1/preview.png?sig=P1A",
+              "roles": [
+                "thumbnail"
+              ]
+            }
+          }
+        },
+        {
+          "id": "orbit-9-frame-1",
+          "collection": "ocean-color",
+          "bbox": [
+            178,
+            -6,
+            -178,
+            2
+          ],
+          "properties": {
+            "datetime": "2026-01-01T09:00:00Z",
+            "platform": "ocean-sat-1",
+            "processing:version": "1"
+          },
+          "assets": {
+            "data": {
+              "href": "https://primary.example/assets/orbit-9-frame-1/data.nc?sig=P1B",
+              "roles": [
+                "data"
+              ]
+            }
+          }
+        },
+        {
+          "id": "orbit-7-frame-2",
+          "collection": "ocean-color",
+          "bbox": [
+            -179,
+            -4,
+            -171,
+            4
+          ],
+          "properties": {
+            "datetime": "2026-01-01T18:00:00Z",
+            "platform": "ocean-sat-1",
+            "processing:version": "1"
+          },
+          "assets": {
+            "data": {
+              "href": "https://primary.example/assets/orbit-7-frame-2/data.nc?sig=P1C",
+              "roles": [
+                "data"
+              ]
+            }
+          }
+        },
+        {
+          "id": "broken-1",
+          "collection": "ocean-color",
+          "bbox": [
+            171,
+            0,
+            173,
+            2
+          ],
+          "properties": {
+            "platform": "ocean-sat-1",
+            "processing:version": "1"
+          },
+          "assets": {
+            "data": {
+              "href": "https://primary.example/assets/broken-1/data.nc?sig=P1D",
+              "roles": [
+                "data"
+              ]
+            }
+          }
+        },
+        {
+          "id": "orbit-8-frame-1",
+          "collection": "ocean-color",
+          "bbox": [
+            172,
+            0,
+            174,
+            2
+          ],
+          "properties": {
+            "datetime": "2026-01-03T05:00:00Z",
+            "platform": "ocean-sat-1",
+            "processing:version": "1"
+          },
+          "assets": {
+            "data": {
+              "href": "https://primary.example/assets/orbit-8-frame-1/data.nc?sig=P1E",
+              "roles": [
+                "data"
+              ]
+            }
+          }
+        }
       ]
     },
     {
       "name": "mirror",
+      "endpoint": {
+        "method": "GET",
+        "href": "/search"
+      },
+      "page_size": 2,
       "duplicate_observation": "orbit-7-frame-1",
-      "item_id": "other-88"
+      "item_id": "other-88",
+      "items": [
+        {
+          "id": "other-88",
+          "collection": "ocean-color",
+          "bbox": [
+            172,
+            -8,
+            178,
+            -2
+          ],
+          "properties": {
+            "datetime": "2026-01-01T06:00:00Z",
+            "platform": "ocean-sat-1",
+            "processing:version": "1"
+          },
+          "assets": {
+            "preview": {
+              "href": "https://mirror.example/stac/other-88/preview.png?sig=M1A",
+              "roles": [
+                "thumbnail"
+              ]
+            }
+          }
+        },
+        {
+          "id": "mirror-1",
+          "collection": "ocean-color",
+          "bbox": [
+            -176,
+            -2,
+            -172,
+            3
+          ],
+          "properties": {
+            "datetime": "2026-01-01T15:00:00Z",
+            "platform": "ocean-sat-2",
+            "processing:version": "1"
+          },
+          "assets": {
+            "data": {
+              "href": "https://mirror.example/stac/mirror-1/data.nc?sig=M1B",
+              "roles": [
+                "data"
+              ]
+            }
+          }
+        },
+        {
+          "id": "mirror-sst-1",
+          "collection": "sst",
+          "bbox": [
+            171,
+            0,
+            175,
+            4
+          ],
+          "properties": {
+            "datetime": "2026-01-01T10:00:00Z",
+            "platform": "ocean-sat-2",
+            "processing:version": "1"
+          },
+          "assets": {
+            "data": {
+              "href": "https://mirror.example/stac/mirror-sst-1/data.nc?sig=M1C",
+              "roles": [
+                "data"
+              ]
+            }
+          }
+        }
+      ]
     }
   ],
   "late_assets": [
     {
       "observation": "orbit-7-frame-1",
       "revision": 2,
-      "role": "data"
+      "role": "data",
+      "source": "primary",
+      "item": {
+        "id": "orbit-7-frame-1",
+        "collection": "ocean-color",
+        "bbox": [
+          172,
+          -8,
+          178,
+          -2
+        ],
+        "properties": {
+          "datetime": "2026-01-01T06:00:00Z",
+          "platform": "ocean-sat-1",
+          "processing:version": "2"
+        },
+        "assets": {
+          "data": {
+            "href": "https://primary.example/assets/orbit-7-frame-1/v2/data.nc?sig=P2A",
+            "roles": [
+              "data"
+            ]
+          },
+          "preview": {
+            "href": "https://primary.example/assets/orbit-7-frame-1/v2/preview.png?sig=P2B",
+            "roles": [
+              "thumbnail"
+            ]
+          }
+        }
+      }
     }
   ]
 }
